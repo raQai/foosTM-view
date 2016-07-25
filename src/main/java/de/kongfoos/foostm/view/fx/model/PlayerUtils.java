@@ -1,10 +1,8 @@
-package de.kongfoos.foostm.view.fx.model.player;
+package de.kongfoos.foostm.view.fx.model;
 
 import com.google.common.base.Strings;
+import de.kongfoos.foostm.model.player.Player;
 
-/**
- * Created by patrick on 17/06/16.
- */
 public class PlayerUtils {
 
     private static final String UNSPECIFIED = "<unspecified>";
