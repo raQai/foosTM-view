@@ -7,12 +7,15 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Collections;
 
 public class FXRegistration extends Registration {
     private final ObjectProperty<FXTeam> team = new SimpleObjectProperty<>();
@@ -21,11 +24,20 @@ public class FXRegistration extends Registration {
             new SimpleObjectProperty<>(RegistrationStatus.OPEN);
     private final ObservableMap<Discipline, BooleanProperty> disciplineMap = FXCollections.observableHashMap();
 
-    public FXRegistration(FXTeam FXTeam, @NotNull Collection<Discipline> disciplines, @NotNull Collection<Discipline> allDisciplines) {
-        super(FXTeam, disciplines);
+    public FXRegistration(FXTeam FXTeam, @NotNull Collection<Discipline> allDisciplines) {
+        super(FXTeam, Collections.emptyList());
         setTeam(FXTeam);
-        disciplines.forEach(this::addDiscipline);
-        allDisciplines.forEach(d -> disciplineMap.put(d, new SimpleBooleanProperty(disciplines.contains(d))));
+        disciplineMap.addListener(new MapChangeListener<Discipline, BooleanProperty>() {
+            @Override
+            public void onChanged(Change<? extends Discipline, ? extends BooleanProperty> change) {
+                if (change.getValueAdded().get()) {
+                    disciplines.add(change.getKey());
+                } else {
+                    disciplines.remove(change.getKey());
+                }
+            }
+        });
+        allDisciplines.forEach(d -> disciplineMap.put(d, new SimpleBooleanProperty()));
     }
 
     @Override
@@ -65,18 +77,16 @@ public class FXRegistration extends Registration {
 
     @Override
     public void addDiscipline(@NotNull Discipline discipline) {
-        if (!getDisciplines().contains(discipline)) {
-            getDisciplines().add(discipline);
-            getDisciplineMap().get(discipline).setValue(true);
+        if(!getDisciplineMap().get(discipline).get()) {
+            getDisciplineMap().get(discipline).set(true);
             setStatus(RegistrationStatus.REGISTERED);
         }
     }
 
     @Override
     public void removeDiscipline(@NotNull Discipline discipline) {
-        getDisciplines().remove(discipline);
         getDisciplineMap().get(discipline).setValue(false);
-        if (getDisciplines().isEmpty()) {
+        if (getDisciplineMap().values().stream().noneMatch(ObservableBooleanValue::get)) {
             setStatus(RegistrationStatus.OPEN);
         }
     }
