@@ -8,7 +8,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
@@ -26,17 +26,20 @@ public class FXRegistration extends Registration {
     public FXRegistration(FXTeam FXTeam, @NotNull Collection<Discipline> allDisciplines) {
         super(FXTeam, Collections.emptyList());
         setTeam(FXTeam);
-        disciplineMap.addListener(new MapChangeListener<Discipline, BooleanProperty>() {
+        allDisciplines.forEach(d -> disciplineMap.put(d, new SimpleBooleanProperty()));
+
+        getDisciplines().addListener(new ListChangeListener<Discipline>() {
             @Override
-            public void onChanged(Change<? extends Discipline, ? extends BooleanProperty> change) {
-                if (change.getValueAdded().get()) {
-                    addDiscipline(change.getKey());
-                } else {
-                    removeDiscipline(change.getKey());
+            public void onChanged(Change<? extends Discipline> c) {
+                while (c.next()) {
+                    if (c.wasAdded()) {
+                        c.getAddedSubList().forEach(d -> getDisciplineMap().get(d).set(true));
+                    } else if (c.wasRemoved()) {
+                        c.getRemoved().forEach(d -> getDisciplineMap().get(d).set(false));
+                    }
                 }
             }
         });
-        allDisciplines.forEach(d -> disciplineMap.put(d, new SimpleBooleanProperty()));
     }
 
     @Override
@@ -93,7 +96,10 @@ public class FXRegistration extends Registration {
     }
 
     public void flipDiscipline(@NotNull Discipline discipline) {
-        final BooleanProperty value = getDisciplineMap().get(discipline);
-        value.set(!value.get());
+        if (getDisciplines().contains(discipline)) {
+            removeDiscipline(discipline);
+        } else {
+            addDiscipline(discipline);
+        }
     }
 }
