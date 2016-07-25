@@ -7,7 +7,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
@@ -31,9 +30,9 @@ public class FXRegistration extends Registration {
             @Override
             public void onChanged(Change<? extends Discipline, ? extends BooleanProperty> change) {
                 if (change.getValueAdded().get()) {
-                    disciplines.add(change.getKey());
+                    addDiscipline(change.getKey());
                 } else {
-                    disciplines.remove(change.getKey());
+                    removeDiscipline(change.getKey());
                 }
             }
         });
@@ -59,7 +58,9 @@ public class FXRegistration extends Registration {
     }
 
     public void setStatus(RegistrationStatus status) {
-        this.status.set(status);
+        if (!this.status.get().equals(status)) {
+            this.status.set(status);
+        }
     }
 
     public ObjectProperty<RegistrationStatus> statusProperty() {
@@ -77,17 +78,22 @@ public class FXRegistration extends Registration {
 
     @Override
     public void addDiscipline(@NotNull Discipline discipline) {
-        if(!getDisciplineMap().get(discipline).get()) {
-            getDisciplineMap().get(discipline).set(true);
+        if (!getDisciplines().contains(discipline)) {
+            getDisciplines().add(discipline);
             setStatus(RegistrationStatus.REGISTERED);
         }
     }
 
     @Override
     public void removeDiscipline(@NotNull Discipline discipline) {
-        getDisciplineMap().get(discipline).setValue(false);
-        if (getDisciplineMap().values().stream().noneMatch(ObservableBooleanValue::get)) {
+        getDisciplines().remove(discipline);
+        if (getDisciplines().isEmpty()) {
             setStatus(RegistrationStatus.OPEN);
         }
+    }
+
+    public void flipDiscipline(@NotNull Discipline discipline) {
+        final BooleanProperty value = getDisciplineMap().get(discipline);
+        value.set(!value.get());
     }
 }
