@@ -2,20 +2,47 @@ package de.kongfoos.foostm.view.fx.model;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
-import de.kongfoos.foostm.model.Team;
+import com.google.common.collect.Lists;
+import de.kongfoos.foostm.model.ITeam;
 import de.kongfoos.foostm.model.Type;
-import de.kongfoos.foostm.model.player.Player;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class FXTeam extends Team {
+public class FXTeam implements ITeam<FXPlayer> {
+    private final ObservableList<FXPlayer> players = FXCollections.observableArrayList();
     private final StringProperty name = new SimpleStringProperty();
+    private final ObjectProperty<Type> type = new SimpleObjectProperty<>();
 
-    protected FXTeam(List<Player> players, Type type) {
-        super(players, type);
+    private FXTeam(@NotNull Collection<FXPlayer> players, @NotNull Type type) {
+        players.forEach(this.players::add);
+        this.type.set(type);
+    }
+
+    @Override
+    public List<FXPlayer> getPlayers() {
+        return players.stream().collect(Collectors.toList());
+    }
+
+    public ObservableList<FXPlayer> playersProperty() {
+        return players;
+    }
+
+    @Override
+    public Type getType() {
+        return type.get();
+    }
+
+    public ObjectProperty<Type> typeProperty() {
+        return type;
     }
 
     @Override
@@ -32,14 +59,13 @@ public class FXTeam extends Team {
         return name;
     }
 
-    public static class Builder extends Team.Builder {
-        private final List<Player> players;
+    public static class Builder {
+        private final List<FXPlayer> players = Lists.newArrayList();
         private final Type type;
         private String name;
 
-        public Builder(@NotNull List<Player> players, Type type) {
-            super(players, type);
-            this.players = players;
+        public Builder(@NotNull Collection<FXPlayer> players, @NotNull Type type) {
+            players.forEach(this.players::add);
             this.type = type;
         }
 
