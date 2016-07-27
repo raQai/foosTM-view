@@ -27,7 +27,7 @@ public class FXDiscipline extends DisciplineImpl<FXTeam, FXMatch, FXTable> {
     private final ObservableList<FXMatch> matches = FXCollections.observableArrayList();
     private final ObservableList<FXTable> tables = FXCollections.observableArrayList();
 
-    FXDiscipline() {
+    public FXDiscipline() {
     }
 
     /**

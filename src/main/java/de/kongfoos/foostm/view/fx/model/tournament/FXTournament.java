@@ -53,4 +53,8 @@ public class FXTournament extends TournamentImpl<FXDiscipline, FXRegistration> {
     public boolean removeRegistration(@NotNull FXRegistration registration) {
         return registrations.remove(registration);
     }
+
+    public ObservableList<FXRegistration> registrations() {
+        return registrations;
+    }
 }

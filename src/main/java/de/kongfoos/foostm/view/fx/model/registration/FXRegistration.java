@@ -135,4 +135,8 @@ public class FXRegistration extends RegistrationImpl<FXTeam, FXDiscipline> {
     public ObservableMap<FXDiscipline, BooleanProperty> disciplinesMap() {
         return disciplinesMap;
     }
+
+    public void flipDiscipline(FXDiscipline discipline) {
+        disciplinesMap.get(discipline).set(!disciplinesMap.get(discipline).get());
+    }
 }
