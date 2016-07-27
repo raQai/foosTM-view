@@ -24,15 +24,6 @@ public class FXTeam extends TeamImpl<FXPlayer> {
     FXTeam() {
     }
 
-    /**
-     * @deprecated do not use constructor with parameters and use package local constructor with builder instead
-     */
-    @Deprecated
-    private FXTeam(@NotNull Collection<FXPlayer> players, @NotNull Type type) {
-        players.forEach(this.players::add);
-        this.type.set(type);
-    }
-
     @Override
     public List<FXPlayer> getPlayers() {
         return Collections.unmodifiableList(players.stream().collect(Collectors.toList()));

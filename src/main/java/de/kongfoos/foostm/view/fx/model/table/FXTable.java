@@ -16,15 +16,6 @@ public class FXTable extends TableImpl<FXMatch> {
     FXTable() {
     }
 
-    /**
-     * @deprecated do not use constructor with parameters and use package local constructor with builder instead
-     */
-    @Deprecated
-    public FXTable(int id, TableType type) {
-        setID(id);
-        setType(type);
-    }
-
     @Override
     public int getID() {
         return id.get();

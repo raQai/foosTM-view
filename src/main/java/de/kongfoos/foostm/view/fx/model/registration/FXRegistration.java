@@ -11,8 +11,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 
 import javax.validation.constraints.NotNull;
@@ -22,20 +20,10 @@ import java.util.List;
 
 public class FXRegistration extends RegistrationImpl<FXTeam, FXDiscipline> {
     private final ObjectProperty<FXTeam> team = new SimpleObjectProperty<>();
-    private final ObservableList<FXDiscipline> disciplines = FXCollections.observableArrayList();
     private final ObservableMap<FXDiscipline, BooleanProperty> disciplinesMap = FXCollections.observableHashMap();
     private final ObjectProperty<RegistrationStatus> status = new SimpleObjectProperty<>(RegistrationStatus.OPEN);
 
     FXRegistration() {
-    }
-
-    /**
-     * @deprecated do not use constructor with parameters and use package local constructor with builder instead
-     */
-    @Deprecated
-    public FXRegistration(@NotNull FXTeam team, @NotNull Collection<FXDiscipline> allDisciplines) {
-        this.team.set(team);
-        allDisciplines.forEach(d -> disciplinesMap.put(d, new SimpleBooleanProperty()));
     }
 
     @Override
@@ -79,28 +67,16 @@ public class FXRegistration extends RegistrationImpl<FXTeam, FXDiscipline> {
     }
 
     protected void setAllDisciplines(@NotNull Collection<FXDiscipline> disciplines) {
-        disciplines.forEach(d -> disciplinesMap.put(d, new SimpleBooleanProperty()));
-        disciplinesMap.addListener(new MapChangeListener<FXDiscipline, BooleanProperty>() {
-            @Override
-            public void onChanged(Change<? extends FXDiscipline, ? extends BooleanProperty> change) {
-                if (change.getValueAdded().get()) {
-                    disciplines.add(change.getKey());
-                } else {
-                    disciplines.remove(change.getKey());
-                }
-//                disciplinesMap.forEach((k, v) -> {
-//                    if (disciplines.contains(k) && !v.get()) {
-//                        disciplines.remove(k);
-//                    } else if (!disciplines.contains(k) && v.get()) {
-//                        disciplines.add(k);
-//                    }
-//                });
+        disciplines.forEach(d -> {
+            final SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(false);
+            booleanProperty.addListener((observable, oldValue, newValue) -> {
                 if (disciplinesMap.values().stream().anyMatch(ObservableBooleanValue::get)) {
-                    setStatus(RegistrationStatus.OPEN);
-                } else {
                     setStatus(RegistrationStatus.REGISTERED);
+                } else {
+                    setStatus(RegistrationStatus.OPEN);
                 }
-            }
+            });
+            disciplinesMap.put(d, booleanProperty);
         });
     }
 

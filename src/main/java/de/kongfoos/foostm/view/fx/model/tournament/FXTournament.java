@@ -15,13 +15,7 @@ public class FXTournament extends TournamentImpl<FXDiscipline, FXRegistration> {
     private ObservableList<FXDiscipline> disciplines = FXCollections.observableArrayList();
     private ObservableList<FXRegistration> registrations = FXCollections.observableArrayList();
 
-    FXTournament() {
-    }
-
-    @Deprecated
-    public FXTournament(ObservableList<FXDiscipline> disciplines, ObservableList<FXRegistration> registrations) {
-        this.disciplines = disciplines;
-        this.registrations = registrations;
+    public FXTournament() {
     }
 
     @Override

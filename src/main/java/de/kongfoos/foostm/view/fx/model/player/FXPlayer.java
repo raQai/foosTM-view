@@ -23,15 +23,6 @@ public class FXPlayer extends PlayerImpl implements Comparable<FXPlayer> {
     FXPlayer() {
     }
 
-    /**
-     * @deprecated do not use constructor with parameters and use package local constructor with builder instead
-     */
-    @Deprecated
-    public FXPlayer(String forename, String surname) {
-        setForename(forename);
-        setSurname(surname);
-    }
-
     @Override
     public String getForename() {
         return forename.get();

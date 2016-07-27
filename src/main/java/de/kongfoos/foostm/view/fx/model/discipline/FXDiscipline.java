@@ -27,22 +27,12 @@ public class FXDiscipline extends DisciplineImpl<FXTeam, FXMatch, FXTable> {
     private final ObservableList<FXMatch> matches = FXCollections.observableArrayList();
     private final ObservableList<FXTable> tables = FXCollections.observableArrayList();
 
-    public FXDiscipline() {
-    }
-
-    /**
-     * @deprecated do not use constructor with parameters and use package local constructor with builder instead
-     */
-    @Deprecated
-    public FXDiscipline(String name, String shortName, Type type) {
-        setName(name);
-        setShortName(shortName);
-        setType(type);
+    FXDiscipline() {
     }
 
     @Override
     public String getName() {
-        return null;
+        return name.get();
     }
 
     @Override
@@ -56,7 +46,7 @@ public class FXDiscipline extends DisciplineImpl<FXTeam, FXMatch, FXTable> {
 
     @Override
     public String getShortName() {
-        return null;
+        return shortName.get();
     }
 
     @Override
