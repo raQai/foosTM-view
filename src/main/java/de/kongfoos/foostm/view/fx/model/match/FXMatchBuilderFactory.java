@@ -1,7 +1,7 @@
 package de.kongfoos.foostm.view.fx.model.match;
 
+import de.kongfoos.foostm.model.match.MatchBuilder;
 import de.kongfoos.foostm.view.fx.model.team.FXTeam;
-import de.kongfoos.foostm.view.model.builder.MatchBuilder;
 
 import javax.validation.constraints.NotNull;
 

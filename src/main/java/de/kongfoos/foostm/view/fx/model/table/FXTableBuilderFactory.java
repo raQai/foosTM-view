@@ -1,7 +1,7 @@
 package de.kongfoos.foostm.view.fx.model.table;
 
+import de.kongfoos.foostm.model.table.TableBuilder;
 import de.kongfoos.foostm.model.table.TableType;
-import de.kongfoos.foostm.view.model.builder.TableBuilder;
 
 import javax.validation.constraints.NotNull;
 

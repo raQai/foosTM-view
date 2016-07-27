@@ -1,7 +1,7 @@
 package de.kongfoos.foostm.view.fx.model.discipline;
 
+import de.kongfoos.foostm.model.discipline.DisciplineBuilder;
 import de.kongfoos.foostm.model.team.Type;
-import de.kongfoos.foostm.view.model.builder.DisciplineBuilder;
 
 import javax.validation.constraints.NotNull;
 

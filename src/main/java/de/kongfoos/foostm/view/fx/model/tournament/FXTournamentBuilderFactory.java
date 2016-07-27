@@ -1,6 +1,7 @@
 package de.kongfoos.foostm.view.fx.model.tournament;
 
-import de.kongfoos.foostm.view.model.builder.TournamentBuilder;
+
+import de.kongfoos.foostm.model.tournament.TournamentBuilder;
 
 public class FXTournamentBuilderFactory {
     public static Builder create() {

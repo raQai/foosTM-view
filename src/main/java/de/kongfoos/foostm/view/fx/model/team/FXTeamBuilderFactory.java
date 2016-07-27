@@ -1,9 +1,9 @@
 package de.kongfoos.foostm.view.fx.model.team;
 
 import com.google.common.collect.Lists;
+import de.kongfoos.foostm.model.team.TeamBuilder;
 import de.kongfoos.foostm.model.team.Type;
 import de.kongfoos.foostm.view.fx.model.player.FXPlayer;
-import de.kongfoos.foostm.view.model.builder.TeamBuilder;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;

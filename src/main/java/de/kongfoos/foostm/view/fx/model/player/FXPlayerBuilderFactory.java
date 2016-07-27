@@ -1,6 +1,6 @@
 package de.kongfoos.foostm.view.fx.model.player;
 
-import de.kongfoos.foostm.view.model.builder.PlayerBuilder;
+import de.kongfoos.foostm.model.player.PlayerBuilder;
 
 import javax.validation.constraints.NotNull;
 

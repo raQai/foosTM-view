@@ -1,9 +1,9 @@
 package de.kongfoos.foostm.view.fx.model.registration;
 
 import com.google.common.collect.Lists;
+import de.kongfoos.foostm.model.registration.RegistrationBuilder;
 import de.kongfoos.foostm.view.fx.model.discipline.FXDiscipline;
 import de.kongfoos.foostm.view.fx.model.team.FXTeam;
-import de.kongfoos.foostm.view.model.builder.RegistrationBuilder;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
