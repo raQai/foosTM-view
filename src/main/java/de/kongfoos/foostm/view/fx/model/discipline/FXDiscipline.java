@@ -1,7 +1,10 @@
-package de.kongfoos.foostm.view.fx.model;
+package de.kongfoos.foostm.view.fx.model.discipline;
 
-import de.kongfoos.foostm.model.DisciplineImpl;
-import de.kongfoos.foostm.model.Type;
+import de.kongfoos.foostm.model.discipline.DisciplineImpl;
+import de.kongfoos.foostm.model.team.Type;
+import de.kongfoos.foostm.view.fx.model.match.FXMatch;
+import de.kongfoos.foostm.view.fx.model.table.FXTable;
+import de.kongfoos.foostm.view.fx.model.team.FXTeam;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,21 +21,33 @@ import java.util.stream.Collectors;
 public class FXDiscipline extends DisciplineImpl<FXTeam, FXMatch, FXTable> {
     private final StringProperty name = new SimpleStringProperty();
     private final StringProperty shortName = new SimpleStringProperty();
+    private final ObjectProperty<Type> type = new SimpleObjectProperty<>();
     private final ObservableList<Predicate<FXTeam>> rules = FXCollections.observableArrayList();
     private final ObservableList<FXTeam> teams = FXCollections.observableArrayList();
     private final ObservableList<FXMatch> matches = FXCollections.observableArrayList();
     private final ObservableList<FXTable> tables = FXCollections.observableArrayList();
-    private final ObjectProperty<Type> type = new SimpleObjectProperty<>();
 
+    FXDiscipline() {
+    }
+
+    /**
+     * @deprecated do not use constructor with parameters and use package local constructor with builder instead
+     */
+    @Deprecated
     public FXDiscipline(String name, String shortName, Type type) {
-        this.name.set(name);
-        this.shortName.set(shortName);
+        setName(name);
+        setShortName(shortName);
         setType(type);
     }
 
     @Override
     public String getName() {
         return null;
+    }
+
+    @Override
+    public void setName(String s) {
+        this.name.set(s);
     }
 
     public StringProperty nameProperty() {
@@ -42,6 +57,11 @@ public class FXDiscipline extends DisciplineImpl<FXTeam, FXMatch, FXTable> {
     @Override
     public String getShortName() {
         return null;
+    }
+
+    @Override
+    public void setShortName(String s) {
+        this.shortName.set(s);
     }
 
     public StringProperty shortNameProperty() {

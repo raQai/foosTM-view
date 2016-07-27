@@ -1,10 +1,8 @@
-package de.kongfoos.foostm.view.fx.model;
+package de.kongfoos.foostm.view.fx.model.team;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import de.kongfoos.foostm.model.ITeam;
-import de.kongfoos.foostm.model.Type;
+import de.kongfoos.foostm.model.team.TeamImpl;
+import de.kongfoos.foostm.model.team.Type;
+import de.kongfoos.foostm.view.fx.model.player.FXPlayer;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,14 +12,22 @@ import javafx.collections.ObservableList;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FXTeam implements ITeam<FXPlayer> {
+public class FXTeam extends TeamImpl<FXPlayer> {
     private final ObservableList<FXPlayer> players = FXCollections.observableArrayList();
     private final StringProperty name = new SimpleStringProperty();
     private final ObjectProperty<Type> type = new SimpleObjectProperty<>();
 
+    FXTeam() {
+    }
+
+    /**
+     * @deprecated do not use constructor with parameters and use package local constructor with builder instead
+     */
+    @Deprecated
     private FXTeam(@NotNull Collection<FXPlayer> players, @NotNull Type type) {
         players.forEach(this.players::add);
         this.type.set(type);
@@ -29,7 +35,17 @@ public class FXTeam implements ITeam<FXPlayer> {
 
     @Override
     public List<FXPlayer> getPlayers() {
-        return players.stream().collect(Collectors.toList());
+        return Collections.unmodifiableList(players.stream().collect(Collectors.toList()));
+    }
+
+    @Override
+    public void addPlayer(@NotNull FXPlayer player) {
+        this.players.add(player);
+    }
+
+    @Override
+    public void removePlayer(@NotNull FXPlayer player) {
+        this.players.remove(player);
     }
 
     public ObservableList<FXPlayer> playersProperty() {
@@ -39,6 +55,11 @@ public class FXTeam implements ITeam<FXPlayer> {
     @Override
     public Type getType() {
         return type.get();
+    }
+
+    @Override
+    public void setType(@NotNull Type type) {
+        this.type.set(type);
     }
 
     public ObjectProperty<Type> typeProperty() {
@@ -59,28 +80,4 @@ public class FXTeam implements ITeam<FXPlayer> {
         return name;
     }
 
-    public static class Builder {
-        private final List<FXPlayer> players = Lists.newArrayList();
-        private final Type type;
-        private String name;
-
-        public Builder(@NotNull Collection<FXPlayer> players, @NotNull Type type) {
-            players.forEach(this.players::add);
-            this.type = type;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public FXTeam build() {
-            final FXTeam FXTeam = new FXTeam(players, type);
-            if (Strings.isNullOrEmpty(name)) {
-                name(Joiner.on(" / ").join(players));
-            }
-            FXTeam.setName(this.name);
-            return FXTeam;
-        }
-    }
 }

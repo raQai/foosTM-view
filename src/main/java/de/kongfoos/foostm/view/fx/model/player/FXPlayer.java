@@ -1,7 +1,8 @@
-package de.kongfoos.foostm.view.fx.model;
+package de.kongfoos.foostm.view.fx.model.player;
 
 import de.kongfoos.foostm.model.player.Gender;
-import de.kongfoos.foostm.model.player.IPlayer;
+import de.kongfoos.foostm.model.player.PlayerImpl;
+import de.kongfoos.foostm.view.PlayerUtils;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,7 +11,7 @@ import javafx.beans.property.StringProperty;
 import java.time.Instant;
 import java.util.Date;
 
-public class FXPlayer implements IPlayer, Comparable<FXPlayer> {
+public class FXPlayer extends PlayerImpl implements Comparable<FXPlayer> {
     private final StringProperty forename = new SimpleStringProperty();
     private final StringProperty surname = new SimpleStringProperty();
     private final StringProperty club = new SimpleStringProperty();
@@ -19,6 +20,13 @@ public class FXPlayer implements IPlayer, Comparable<FXPlayer> {
     private final ObjectProperty<Date> birthDate = new SimpleObjectProperty<>(Date.from(Instant.now()));
     private final ObjectProperty<Gender> gender = new SimpleObjectProperty<>(Gender.MALE);
 
+    FXPlayer() {
+    }
+
+    /**
+     * @deprecated do not use constructor with parameters and use package local constructor with builder instead
+     */
+    @Deprecated
     public FXPlayer(String forename, String surname) {
         setForename(forename);
         setSurname(surname);
@@ -123,17 +131,8 @@ public class FXPlayer implements IPlayer, Comparable<FXPlayer> {
     }
 
     @Override
-    public String getName() {
-        return getSurname().toUpperCase() + " " + getForename();
-    }
-
-    @Override
     public int compareTo(FXPlayer o) {
         return getName().toLowerCase().compareTo(o.getName().toLowerCase());
     }
 
-    @Override
-    public String toString() {
-        return getName();
-    }
 }
