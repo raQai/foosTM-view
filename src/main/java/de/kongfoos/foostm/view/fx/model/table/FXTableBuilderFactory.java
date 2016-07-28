@@ -1,6 +1,6 @@
 package de.kongfoos.foostm.view.fx.model.table;
 
-import de.kongfoos.foostm.model.table.TableBuilder;
+import de.kongfoos.foostm.model.table.ATableBuilder;
 import de.kongfoos.foostm.model.table.TableType;
 
 import javax.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ public class FXTableBuilderFactory {
         return new Builder(id, type).build();
     }
 
-    private static class Builder extends TableBuilder<FXTable> {
+    private static class Builder extends ATableBuilder<FXTable> {
         private Builder(@NotNull int id, @NotNull TableType type) {
             super(id, type);
         }
