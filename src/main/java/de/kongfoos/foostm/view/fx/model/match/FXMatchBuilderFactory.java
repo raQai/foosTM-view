@@ -1,6 +1,6 @@
 package de.kongfoos.foostm.view.fx.model.match;
 
-import de.kongfoos.foostm.model.match.MatchBuilder;
+import de.kongfoos.foostm.model.match.AMatchBuilder;
 import de.kongfoos.foostm.view.fx.model.team.FXTeam;
 
 import javax.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ public class FXMatchBuilderFactory {
         return new Builder(team1, team2).build();
     }
 
-    private static class Builder extends MatchBuilder<FXMatch, FXTeam> {
+    private static class Builder extends AMatchBuilder<FXMatch, FXTeam> {
         private Builder(FXTeam team1, FXTeam team2) {
             super(team1, team2);
         }
