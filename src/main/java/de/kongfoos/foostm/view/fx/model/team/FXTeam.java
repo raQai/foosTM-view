@@ -1,6 +1,6 @@
 package de.kongfoos.foostm.view.fx.model.team;
 
-import de.kongfoos.foostm.model.team.TeamImpl;
+import de.kongfoos.foostm.model.team.ATeam;
 import de.kongfoos.foostm.model.team.Type;
 import de.kongfoos.foostm.view.fx.model.player.FXPlayer;
 import javafx.beans.property.ObjectProperty;
@@ -11,12 +11,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FXTeam extends TeamImpl<FXPlayer> {
+public class FXTeam extends ATeam<FXPlayer> {
     private final ObservableList<FXPlayer> players = FXCollections.observableArrayList();
     private final StringProperty name = new SimpleStringProperty();
     private final ObjectProperty<Type> type = new SimpleObjectProperty<>();
@@ -30,13 +29,13 @@ public class FXTeam extends TeamImpl<FXPlayer> {
     }
 
     @Override
-    public void addPlayer(@NotNull FXPlayer player) {
-        this.players.add(player);
+    public boolean addPlayer(@NotNull FXPlayer player) {
+        return this.players.add(player);
     }
 
     @Override
-    public void removePlayer(@NotNull FXPlayer player) {
-        this.players.remove(player);
+    public boolean removePlayer(@NotNull FXPlayer player) {
+        return this.players.remove(player);
     }
 
     public ObservableList<FXPlayer> playersProperty() {
