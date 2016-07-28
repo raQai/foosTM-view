@@ -1,6 +1,6 @@
 package de.kongfoos.foostm.view.fx.model.discipline;
 
-import de.kongfoos.foostm.model.discipline.DisciplineImpl;
+import de.kongfoos.foostm.model.discipline.ADiscipline;
 import de.kongfoos.foostm.model.team.Type;
 import de.kongfoos.foostm.view.fx.model.match.FXMatch;
 import de.kongfoos.foostm.view.fx.model.table.FXTable;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class FXDiscipline extends DisciplineImpl<FXTeam, FXMatch, FXTable> {
+public class FXDiscipline extends ADiscipline<FXTeam, FXMatch, FXTable> {
     private final StringProperty name = new SimpleStringProperty();
     private final StringProperty shortName = new SimpleStringProperty();
     private final ObjectProperty<Type> type = new SimpleObjectProperty<>();
@@ -64,8 +64,13 @@ public class FXDiscipline extends DisciplineImpl<FXTeam, FXMatch, FXTable> {
     }
 
     @Override
-    public void addRule(@NotNull Predicate<FXTeam> predicate) {
-        rules.add(predicate);
+    public boolean addRule(@NotNull Predicate<FXTeam> predicate) {
+        return rules.add(predicate);
+    }
+
+    @Override
+    public boolean removeRule(@NotNull Predicate<FXTeam> predicate) {
+        return rules.remove(predicate);
     }
 
     public ObservableList<Predicate<FXTeam>> rules() {

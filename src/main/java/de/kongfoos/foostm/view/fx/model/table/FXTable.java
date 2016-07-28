@@ -1,6 +1,6 @@
 package de.kongfoos.foostm.view.fx.model.table;
 
-import de.kongfoos.foostm.model.table.TableImpl;
+import de.kongfoos.foostm.model.table.ATable;
 import de.kongfoos.foostm.model.table.TableType;
 import de.kongfoos.foostm.view.fx.model.match.FXMatch;
 import javafx.beans.property.IntegerProperty;
@@ -8,7 +8,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-public class FXTable extends TableImpl<FXMatch> {
+public class FXTable extends ATable<FXMatch> {
     private final IntegerProperty id = new SimpleIntegerProperty();
     private final ObjectProperty<TableType> type = new SimpleObjectProperty<>();
     private final ObjectProperty<FXMatch> match = new SimpleObjectProperty<>();

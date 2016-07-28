@@ -1,6 +1,6 @@
 package de.kongfoos.foostm.view.fx.model.match;
 
-import de.kongfoos.foostm.model.match.MatchImpl;
+import de.kongfoos.foostm.model.match.AMatch;
 import de.kongfoos.foostm.model.match.MatchStatus;
 import de.kongfoos.foostm.view.fx.model.team.FXTeam;
 import javafx.beans.property.ObjectProperty;
@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 import javax.validation.constraints.NotNull;
 
-public class FXMatch extends MatchImpl<FXTeam> {
+public class FXMatch extends AMatch<FXTeam> {
     private final ObjectProperty<FXTeam> team1 = new SimpleObjectProperty<>();
     private final ObjectProperty<FXTeam> team2 = new SimpleObjectProperty<>();
     private final ObjectProperty<MatchStatus> status = new SimpleObjectProperty<>();

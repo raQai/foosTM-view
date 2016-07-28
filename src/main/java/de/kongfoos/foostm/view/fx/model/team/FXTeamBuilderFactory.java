@@ -1,7 +1,7 @@
 package de.kongfoos.foostm.view.fx.model.team;
 
 import com.google.common.collect.Lists;
-import de.kongfoos.foostm.model.team.TeamBuilder;
+import de.kongfoos.foostm.model.team.ATeamBuilder;
 import de.kongfoos.foostm.model.team.Type;
 import de.kongfoos.foostm.view.fx.model.player.FXPlayer;
 
@@ -26,7 +26,7 @@ public class FXTeamBuilderFactory {
         return new Builder(players, Type.TEAM).name(name).build();
     }
 
-    private static class Builder extends TeamBuilder<FXTeam, FXPlayer> {
+    private static class Builder extends ATeamBuilder<FXTeam, FXPlayer> {
         private Builder(@NotNull Collection<FXPlayer> players, @NotNull Type type) {
             super(players, type);
         }

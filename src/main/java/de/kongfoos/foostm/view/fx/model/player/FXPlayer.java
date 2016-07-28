@@ -1,23 +1,22 @@
 package de.kongfoos.foostm.view.fx.model.player;
 
+import de.kongfoos.foostm.model.player.APlayer;
 import de.kongfoos.foostm.model.player.Gender;
-import de.kongfoos.foostm.model.player.PlayerImpl;
-import de.kongfoos.foostm.view.PlayerUtils;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.time.Instant;
-import java.util.Date;
+import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 
-public class FXPlayer extends PlayerImpl implements Comparable<FXPlayer> {
+public class FXPlayer extends APlayer implements Comparable<FXPlayer> {
     private final StringProperty forename = new SimpleStringProperty();
     private final StringProperty surname = new SimpleStringProperty();
     private final StringProperty club = new SimpleStringProperty();
     private final StringProperty itsf = new SimpleStringProperty();
     private final StringProperty dtfb = new SimpleStringProperty();
-    private final ObjectProperty<Date> birthDate = new SimpleObjectProperty<>(Date.from(Instant.now()));
+    private final ObjectProperty<Calendar> birthDate = new SimpleObjectProperty<>(Calendar.getInstance());
     private final ObjectProperty<Gender> gender = new SimpleObjectProperty<>(Gender.MALE);
 
     FXPlayer() {
@@ -29,7 +28,7 @@ public class FXPlayer extends PlayerImpl implements Comparable<FXPlayer> {
     }
 
     @Override
-    public void setForename(String s) {
+    public void setForename(@NotNull String s) {
         forename.set(s);
     }
 
@@ -43,7 +42,7 @@ public class FXPlayer extends PlayerImpl implements Comparable<FXPlayer> {
     }
 
     @Override
-    public void setSurname(String s) {
+    public void setSurname(@NotNull String s) {
         surname.set(s);
     }
 
@@ -57,7 +56,7 @@ public class FXPlayer extends PlayerImpl implements Comparable<FXPlayer> {
     }
 
     @Override
-    public void setGender(Gender gender) {
+    public void setGender(@NotNull Gender gender) {
         this.gender.set(gender);
     }
 
@@ -66,16 +65,16 @@ public class FXPlayer extends PlayerImpl implements Comparable<FXPlayer> {
     }
 
     @Override
-    public Date getBirthDate() {
+    public Calendar getBirthDate() {
         return birthDate.get();
     }
 
     @Override
-    public void setBirthDate(Date date) {
+    public void setBirthDate(Calendar date) {
         birthDate.setValue(date);
     }
 
-    public ObjectProperty<Date> birthDateProperty() {
+    public ObjectProperty<Calendar> birthDateProperty() {
         return birthDate;
     }
 
