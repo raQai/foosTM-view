@@ -1,6 +1,6 @@
 package de.kongfoos.foostm.view.fx.model.discipline;
 
-import de.kongfoos.foostm.model.discipline.DisciplineBuilder;
+import de.kongfoos.foostm.model.discipline.ADisciplineBuilder;
 import de.kongfoos.foostm.model.team.Type;
 
 import javax.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ public class FXDisciplineBuilderFactory {
         return new Builder(name, shortName, Type.TEAM).build();
     }
 
-    private static class Builder extends DisciplineBuilder<FXDiscipline> {
+    private static class Builder extends ADisciplineBuilder<FXDiscipline> {
         private Builder(@NotNull String name, @NotNull String shortName, @NotNull Type type) {
             super(name, shortName, type);
         }
