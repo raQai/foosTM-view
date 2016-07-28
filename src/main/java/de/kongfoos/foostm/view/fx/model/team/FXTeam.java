@@ -28,6 +28,11 @@ public class FXTeam extends TeamImpl<FXPlayer> {
     public List<FXPlayer> getPlayers() {
         return Collections.unmodifiableList(players.stream().collect(Collectors.toList()));
     }
+    
+    @Override
+	public void setPlayers(List<FXPlayer> players) {
+    	FXCollections.observableArrayList(players);
+	}
 
     @Override
     public void addPlayer(@NotNull FXPlayer player) {

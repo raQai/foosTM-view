@@ -1,15 +1,14 @@
 package de.kongfoos.foostm.view.fx.model.player;
 
-import de.kongfoos.foostm.model.player.Gender;
-import de.kongfoos.foostm.model.player.PlayerImpl;
-import de.kongfoos.foostm.view.PlayerUtils;
+import java.time.Instant;
+import java.util.Date;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
-import java.time.Instant;
-import java.util.Date;
+import de.kongfoos.foostm.model.player.Gender;
+import de.kongfoos.foostm.model.player.PlayerImpl;
 
 public class FXPlayer extends PlayerImpl implements Comparable<FXPlayer> {
     private final StringProperty forename = new SimpleStringProperty();
