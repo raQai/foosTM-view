@@ -29,11 +29,6 @@ public class FXTeam extends ATeam<FXPlayer> {
     }
     
     @Override
-	public void setPlayers(List<FXPlayer> players) {
-    	FXCollections.observableArrayList(players);
-	}
-
-    @Override
     public boolean addPlayer(@NotNull FXPlayer player) {
         return this.players.add(player);
     }
