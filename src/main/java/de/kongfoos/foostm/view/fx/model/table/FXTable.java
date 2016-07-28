@@ -17,12 +17,12 @@ public class FXTable extends ATable<FXMatch> {
     }
 
     @Override
-    public int getID() {
+    public int getNumber() {
         return id.get();
     }
 
     @Override
-    public void setID(int i) {
+    public void setNumber(int i) {
         id.set(i);
     }
 
