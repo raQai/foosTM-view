@@ -1,7 +1,7 @@
 package de.kongfoos.foostm.view.fx.model.registration;
 
 import com.google.common.collect.Lists;
-import de.kongfoos.foostm.model.registration.RegistrationImpl;
+import de.kongfoos.foostm.model.registration.ARegistration;
 import de.kongfoos.foostm.model.registration.RegistrationStatus;
 import de.kongfoos.foostm.view.fx.model.discipline.FXDiscipline;
 import de.kongfoos.foostm.view.fx.model.team.FXTeam;
@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class FXRegistration extends RegistrationImpl<FXTeam, FXDiscipline> {
+public class FXRegistration extends ARegistration<FXTeam, FXDiscipline> {
     private final ObjectProperty<FXTeam> team = new SimpleObjectProperty<>();
     private final ObservableMap<FXDiscipline, BooleanProperty> disciplinesMap = FXCollections.observableHashMap();
     private final ObjectProperty<RegistrationStatus> status = new SimpleObjectProperty<>(RegistrationStatus.OPEN);
