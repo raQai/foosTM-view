@@ -1,6 +1,6 @@
 package de.kongfoos.foostm.view.fx.model.player;
 
-import de.kongfoos.foostm.model.player.PlayerBuilder;
+import de.kongfoos.foostm.model.player.APlayerBuilder;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +9,7 @@ public class FXPlayerBuilderFactory {
         return new Builder(forname, surname);
     }
 
-    public static class Builder extends PlayerBuilder<FXPlayer> {
+    public static class Builder extends APlayerBuilder<FXPlayer> {
         private Builder(String forename, String surname) {
             super(forename, surname);
         }
