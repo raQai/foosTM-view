@@ -1,4 +1,4 @@
-package de.kongfoos.foostm.view.fx.ui.controls;
+package de.kongfoos.foostm.view.fx.ui.control.textfield;
 
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
@@ -30,7 +30,7 @@ public class AutoCompleteTextField<T> extends TextField {
     /**
      * Construct a new AutoCompleteTextField.
      */
-    protected AutoCompleteTextField() {
+    AutoCompleteTextField() {
         super();
         invalidEntryFormat();
         entries = new TreeSet<>();
@@ -82,7 +82,7 @@ public class AutoCompleteTextField<T> extends TextField {
         }
     }
 
-    public void addEntries(Collection<T> entries) {
+    void addEntries(Collection<T> entries) {
         this.entries.addAll(entries.stream().filter(e -> e != null).collect(Collectors.toList()));
     }
 
@@ -144,7 +144,7 @@ public class AutoCompleteTextField<T> extends TextField {
     /**
      * specifies how the text field values will be displayed if a selection was made
      */
-    public String printEntry(T entry) {
+    String printEntry(T entry) {
         return entry.toString();
     }
 }
