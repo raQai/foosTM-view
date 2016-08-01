@@ -1,9 +1,9 @@
 package de.kongfoos.foostm.view.fx.model.match;
 
+import javax.validation.constraints.NotNull;
+
 import de.kongfoos.foostm.model.match.AMatchBuilder;
 import de.kongfoos.foostm.view.fx.model.team.FXTeam;
-
-import javax.validation.constraints.NotNull;
 
 public class FXMatchBuilderFactory {
     public static FXMatch buildMatch(@NotNull FXTeam team1, @NotNull FXTeam team2) {

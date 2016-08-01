@@ -1,10 +1,10 @@
 package de.kongfoos.foostm.view.fx.model.discipline;
 
-import de.kongfoos.foostm.model.discipline.ADiscipline;
-import de.kongfoos.foostm.model.team.Type;
-import de.kongfoos.foostm.view.fx.model.match.FXMatch;
-import de.kongfoos.foostm.view.fx.model.table.FXTable;
-import de.kongfoos.foostm.view.fx.model.team.FXTeam;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,12 +13,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-public class FXDiscipline extends ADiscipline<FXTeam, FXMatch, FXTable> {
+import de.kongfoos.foostm.model.discipline.Discipline;
+import de.kongfoos.foostm.model.team.Type;
+import de.kongfoos.foostm.view.fx.model.match.FXMatch;
+import de.kongfoos.foostm.view.fx.model.table.FXTable;
+import de.kongfoos.foostm.view.fx.model.team.FXTeam;
+
+public class FXDiscipline extends Discipline<FXTeam, FXMatch, FXTable> {
     private final StringProperty name = new SimpleStringProperty();
     private final StringProperty shortName = new SimpleStringProperty();
     private final ObjectProperty<Type> type = new SimpleObjectProperty<>();

@@ -1,13 +1,17 @@
 package de.kongfoos.foostm.view.fx.ui.control.textfield;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * This class is a TextField which implements an "autocomplete" functionality, based on a supplied list of entries.

@@ -1,8 +1,9 @@
 package de.kongfoos.foostm.view.fx.model.team;
 
-import de.kongfoos.foostm.model.team.ATeam;
-import de.kongfoos.foostm.model.team.Type;
-import de.kongfoos.foostm.view.fx.model.player.FXPlayer;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,11 +12,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class FXTeam extends ATeam<FXPlayer> {
+import de.kongfoos.foostm.model.team.Team;
+import de.kongfoos.foostm.model.team.Type;
+import de.kongfoos.foostm.view.fx.model.player.FXPlayer;
+
+public class FXTeam extends Team<FXPlayer> {
     private final ObservableList<FXPlayer> players = FXCollections.observableArrayList();
     private final StringProperty name = new SimpleStringProperty();
     private final ObjectProperty<Type> type = new SimpleObjectProperty<>();
@@ -27,7 +29,7 @@ public class FXTeam extends ATeam<FXPlayer> {
     public List<FXPlayer> getPlayers() {
         return Collections.unmodifiableList(players.stream().collect(Collectors.toList()));
     }
-
+    
     @Override
     public boolean addPlayer(@NotNull FXPlayer player) {
         return this.players.add(player);

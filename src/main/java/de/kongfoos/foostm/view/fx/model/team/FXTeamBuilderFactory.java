@@ -1,14 +1,16 @@
 package de.kongfoos.foostm.view.fx.model.team;
 
-import com.google.common.collect.Lists;
-import de.kongfoos.foostm.model.team.ATeamBuilder;
-import de.kongfoos.foostm.model.team.Type;
-import de.kongfoos.foostm.view.fx.model.player.FXPlayer;
-
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
+
+import com.google.common.collect.Lists;
+
+import de.kongfoos.foostm.model.team.ATeamBuilder;
+import de.kongfoos.foostm.model.team.Type;
+import de.kongfoos.foostm.view.fx.model.player.FXPlayer;
 
 public class FXTeamBuilderFactory {
     public static FXTeam buildSingles(@NotNull FXPlayer player) {

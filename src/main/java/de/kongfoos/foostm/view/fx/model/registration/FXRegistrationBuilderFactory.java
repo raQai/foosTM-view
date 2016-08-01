@@ -1,13 +1,15 @@
 package de.kongfoos.foostm.view.fx.model.registration;
 
+import java.util.Collection;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
+
 import com.google.common.collect.Lists;
+
 import de.kongfoos.foostm.model.registration.ARegistrationBuilder;
 import de.kongfoos.foostm.view.fx.model.discipline.FXDiscipline;
 import de.kongfoos.foostm.view.fx.model.team.FXTeam;
-
-import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.List;
 
 public class FXRegistrationBuilderFactory {
     public static Builder create(@NotNull FXTeam team, @NotNull Collection<FXDiscipline> allDisciplines) {
