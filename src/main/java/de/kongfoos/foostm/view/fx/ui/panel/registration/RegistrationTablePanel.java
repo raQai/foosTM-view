@@ -6,56 +6,48 @@ import de.kongfoos.foostm.model.team.Type;
 import de.kongfoos.foostm.view.fx.model.discipline.FXDiscipline;
 import de.kongfoos.foostm.view.fx.model.registration.FXRegistration;
 import de.kongfoos.foostm.view.fx.model.tournament.FXTournament;
+import de.kongfoos.foostm.view.fx.ui.panel.FoosTMPanel;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.Node;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class RegistrationTablePanel extends VBox {
+public class RegistrationTablePanel extends FoosTMPanel {
 
     private final FXTournament tournament;
 
     public RegistrationTablePanel(FXTournament tournament) {
+        super("Registrations");
+        setMinWidth(400);
         this.tournament = tournament;
+    }
 
-        // TODO use css
-        setupStyle();
-
-        // TODO use css
-        final Label registrationLable = new Label("Registrations");
-        registrationLable.setFont(new Font(registrationLable.getFont()
-                .getName(), 20));
-        getChildren().add(registrationLable);
-
+    @Override
+    protected List<? extends Node> addComponents() {
         final Set<Type> types = tournament.getDisciplines().stream().map(FXDiscipline::getType)
                 .collect(Collectors.toSet());
 
-        if (types.size() == 1) {
-            types.forEach(t -> getChildren().add(createRegistrationTableView(t)));
-        } else {
-            final TabPane tabPane = new TabPane();
-            types.forEach(t -> {
-                final Tab tab = new Tab();
-                tab.setClosable(false);
-                // TODO use resources for name
-                tab.setText(CaseFormat.UPPER_UNDERSCORE.to(
-                        CaseFormat.UPPER_CAMEL, t.name()));
-                tab.setContent(createRegistrationTableView(t));
-                tabPane.getTabs().add(tab);
-            });
-            getChildren().add(tabPane);
-        }
-    }
+        final TabPane tabPane = new TabPane();
+        types.forEach(t -> {
+            final Tab tab = new Tab();
+            tab.setClosable(false);
+            // TODO use resources for name
+            tab.setText(CaseFormat.UPPER_UNDERSCORE.to(
+                    CaseFormat.UPPER_CAMEL, t.name()));
+            tab.setContent(createRegistrationTableView(t));
+            tabPane.getTabs().add(tab);
+        });
 
-    private void setupStyle() {
-        setPadding(new Insets(15));
-        setSpacing(10);
+        return Collections.singletonList(tabPane);
     }
 
     private TableView<FXRegistration> createRegistrationTableView(Type type) {
@@ -118,4 +110,5 @@ public class RegistrationTablePanel extends VBox {
         });
         return dCol;
     }
+
 }

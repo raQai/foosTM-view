@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 /**
  * This class is a TextField which implements an "autocomplete" functionality, based on a supplied list of entries.
  */
+// TODO update if lastSelectedEntry was updated
 public class AutoCompleteTextField<T> extends TextField {
     /**
      * The existing autocomplete entries.
