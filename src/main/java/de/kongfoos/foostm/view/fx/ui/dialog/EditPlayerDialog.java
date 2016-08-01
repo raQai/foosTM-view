@@ -8,8 +8,15 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.util.StringConverter;
 
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 // TODO use simpleplayer isntead of FXPlayer after jpa merge
 public class EditPlayerDialog extends ConfirmSaveDialog<FXPlayer> {
@@ -18,7 +25,7 @@ public class EditPlayerDialog extends ConfirmSaveDialog<FXPlayer> {
     private TextField forename;
     private TextField surname;
     private Gender gender;
-    private DatePicker birthDate;
+    private Calendar birthDate = Calendar.getInstance();
     private TextField club;
     private TextField itsf;
     private TextField dtfb;
@@ -33,8 +40,8 @@ public class EditPlayerDialog extends ConfirmSaveDialog<FXPlayer> {
     @Override
     FXPlayer createResult() {
         return FXPlayerBuilderFactory.create(forename.getText(), surname.getText())
-                .gender(gender)
-                .club(club.getText()).itsf(itsf.getText()).dtfb(dtfb.getText())
+                .gender(gender).birthDate(birthDate).club(club.getText())
+                .itsf(itsf.getText()).dtfb(dtfb.getText())
                 .build();
     }
 
@@ -49,11 +56,50 @@ public class EditPlayerDialog extends ConfirmSaveDialog<FXPlayer> {
         forename = addLabeledTextField(grid, rowIndex++, "forename", player.getForename());
         surname = addLabeledTextField(grid, rowIndex++, "surname", player.getSurname());
         addLabeledNode(grid, rowIndex++, "gender", createGenderRBHBox());
+        addLabeledNode(grid, rowIndex++, "birth date", createBirthDatePicker());
         club = addLabeledTextField(grid, rowIndex++, "club", player.getClub());
         itsf = addLabeledTextField(grid, rowIndex++, "itsf", player.getItsf());
-        dtfb = addLabeledTextField(grid, rowIndex++, "dtfb", player.getDtfb());
+        dtfb = addLabeledTextField(grid, rowIndex, "dtfb", player.getDtfb());
 
         return grid;
+    }
+
+    private Node createBirthDatePicker() {
+        final DatePicker dp = new DatePicker();
+        if (player.getBirthDate() != null) {
+            final LocalDate ld = LocalDate.of(
+                    player.getBirthDate().get(Calendar.YEAR),
+                    player.getBirthDate().get(Calendar.MONTH),
+                    player.getBirthDate().get(Calendar.DAY_OF_MONTH));
+            dp.setValue(ld);
+
+            dp.setConverter(new StringConverter<LocalDate>() {
+                private DateTimeFormatter formatter = DateTimeFormatter
+//                        .ofLocalizedDateTime(FormatStyle.MEDIUM).withLocale(Locale.getDefault());
+                        .ofPattern("dd.MM.yyyy");
+
+                @Override
+                public String toString(LocalDate localDate) {
+                    return (localDate == null)
+                            ? ""
+                            : formatter.format(localDate);
+                }
+
+                @Override
+                public LocalDate fromString(String dateString) {
+                    return (dateString == null || dateString.trim().isEmpty())
+                            ? null
+                            : LocalDate.parse(dateString, formatter);
+                }
+            });
+
+            dp.valueProperty().addListener((o, oldValue, newValue) -> {
+                final Instant instant = Instant.from(newValue.atStartOfDay(ZoneId.systemDefault()));
+                final Date date = Date.from(instant);
+                birthDate.setTime(date);
+            });
+        }
+        return dp;
     }
 
     private HBox createGenderRBHBox() {

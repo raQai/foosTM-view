@@ -71,6 +71,7 @@ public class RegistrationPanel extends FoosTMPanel {
                 final EditPlayerDialog editPlayerDialog = new EditPlayerDialog(player);
                 editPlayerDialog.init().showAndWait()
                         .ifPresent(editPlayer -> {
+                            //TODO move to controller
                             if (!player.getForename().equals(editPlayer.getForename())) {
                                 player.setForename(editPlayer.getForename());
                             }
@@ -79,6 +80,9 @@ public class RegistrationPanel extends FoosTMPanel {
                             }
                             if (!player.getGender().equals(editPlayer.getGender())) {
                                 player.setGender(editPlayer.getGender());
+                            }
+                            if (!player.getBirthDate().equals(editPlayer.getBirthDate())) {
+                                player.setBirthDate(editPlayer.getBirthDate());
                             }
                             if (!player.getClub().equals(editPlayer.getClub())) {
                                 player.setClub(editPlayer.getClub());
@@ -109,6 +113,9 @@ public class RegistrationPanel extends FoosTMPanel {
                             }
                             if (!player.getGender().equals(editPlayer.getGender())) {
                                 player.setGender(editPlayer.getGender());
+                            }
+                            if (!player.getBirthDate().equals(editPlayer.getBirthDate())) {
+                                player.setBirthDate(editPlayer.getBirthDate());
                             }
                             if (!player.getClub().equals(editPlayer.getClub())) {
                                 player.setClub(editPlayer.getClub());
