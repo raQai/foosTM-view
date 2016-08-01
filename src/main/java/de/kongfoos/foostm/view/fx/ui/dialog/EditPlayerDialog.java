@@ -115,6 +115,8 @@ public class EditPlayerDialog extends ConfirmSaveDialog<FXPlayer> {
         femaleRB.setSelected(player.isFemale());
         femaleRB.setUserData(Gender.FEMALE);
 
+        gender = player.getGender();
+
         group.selectedToggleProperty().addListener((o, oldValue, newValue) -> {
             if (group.getSelectedToggle() != null) {
                 gender = (Gender) group.getSelectedToggle().getUserData();
