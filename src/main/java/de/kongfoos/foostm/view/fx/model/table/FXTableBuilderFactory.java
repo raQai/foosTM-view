@@ -1,9 +1,9 @@
 package de.kongfoos.foostm.view.fx.model.table;
 
+import javax.validation.constraints.NotNull;
+
 import de.kongfoos.foostm.model.table.ATableBuilder;
 import de.kongfoos.foostm.model.table.TableType;
-
-import javax.validation.constraints.NotNull;
 
 public class FXTableBuilderFactory {
     public static FXTable buildTable(@NotNull int id, @NotNull TableType type) {

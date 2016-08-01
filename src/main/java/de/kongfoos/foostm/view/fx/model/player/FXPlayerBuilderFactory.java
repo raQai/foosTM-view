@@ -1,8 +1,8 @@
 package de.kongfoos.foostm.view.fx.model.player;
 
-import de.kongfoos.foostm.model.player.APlayerBuilder;
-
 import javax.validation.constraints.NotNull;
+
+import de.kongfoos.foostm.model.player.APlayerBuilder;
 
 public class FXPlayerBuilderFactory {
     public static Builder create(@NotNull String forname, @NotNull String surname) {

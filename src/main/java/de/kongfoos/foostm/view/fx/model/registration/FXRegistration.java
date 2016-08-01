@@ -1,10 +1,9 @@
 package de.kongfoos.foostm.view.fx.model.registration;
 
-import com.google.common.collect.Lists;
-import de.kongfoos.foostm.model.registration.ARegistration;
-import de.kongfoos.foostm.model.registration.RegistrationStatus;
-import de.kongfoos.foostm.view.fx.model.discipline.FXDiscipline;
-import de.kongfoos.foostm.view.fx.model.team.FXTeam;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -14,11 +13,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
-public class FXRegistration extends ARegistration<FXTeam, FXDiscipline> {
+import com.google.common.collect.Lists;
+
+import de.kongfoos.foostm.model.registration.Registration;
+import de.kongfoos.foostm.model.registration.RegistrationStatus;
+import de.kongfoos.foostm.view.fx.model.discipline.FXDiscipline;
+import de.kongfoos.foostm.view.fx.model.team.FXTeam;
+
+public class FXRegistration extends Registration<FXTeam, FXDiscipline> {
     private final ObjectProperty<FXTeam> team = new SimpleObjectProperty<>();
     private final ObservableMap<FXDiscipline, BooleanProperty> disciplinesMap = FXCollections.observableHashMap();
     private final ObjectProperty<RegistrationStatus> status = new SimpleObjectProperty<>(RegistrationStatus.OPEN);

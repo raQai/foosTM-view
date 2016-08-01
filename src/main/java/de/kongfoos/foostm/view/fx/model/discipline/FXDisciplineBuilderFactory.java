@@ -1,9 +1,9 @@
 package de.kongfoos.foostm.view.fx.model.discipline;
 
+import javax.validation.constraints.NotNull;
+
 import de.kongfoos.foostm.model.discipline.ADisciplineBuilder;
 import de.kongfoos.foostm.model.team.Type;
-
-import javax.validation.constraints.NotNull;
 
 public class FXDisciplineBuilderFactory {
     public static FXDiscipline buildSingles(@NotNull String name, @NotNull String shortName) {

@@ -29,6 +29,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.13'
     compile 'org.codehaus.groovy:groovy-all:2.3.+'
     compile 'de.kongfoos:foosTM-model:1.0-SNAPSHOT'
+	compile 'de.kongfoos:foosTM-io:1.0-SNAPSHOT'
     // FIXME remove when db was moved to foosTM-io
     compile 'de.kongfoos:foosTM:1.0-SNAPSHOT'
 }

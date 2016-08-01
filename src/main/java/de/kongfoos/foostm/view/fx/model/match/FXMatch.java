@@ -1,14 +1,15 @@
 package de.kongfoos.foostm.view.fx.model.match;
 
-import de.kongfoos.foostm.model.match.AMatch;
-import de.kongfoos.foostm.model.match.MatchStatus;
-import de.kongfoos.foostm.view.fx.model.team.FXTeam;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import javax.validation.constraints.NotNull;
 
-public class FXMatch extends AMatch<FXTeam> {
+import de.kongfoos.foostm.model.match.Match;
+import de.kongfoos.foostm.model.match.MatchStatus;
+import de.kongfoos.foostm.view.fx.model.team.FXTeam;
+
+public class FXMatch extends Match<FXTeam> {
     private final ObjectProperty<FXTeam> team1 = new SimpleObjectProperty<>();
     private final ObjectProperty<FXTeam> team2 = new SimpleObjectProperty<>();
     private final ObjectProperty<MatchStatus> status = new SimpleObjectProperty<>();
