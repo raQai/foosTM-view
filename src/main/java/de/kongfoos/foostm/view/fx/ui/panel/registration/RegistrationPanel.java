@@ -77,6 +77,9 @@ public class RegistrationPanel extends FoosTMPanel {
                             if (!player.getSurname().equals(editPlayer.getSurname())) {
                                 player.setSurname(editPlayer.getSurname());
                             }
+                            if (!player.getGender().equals(editPlayer.getGender())) {
+                                player.setGender(editPlayer.getGender());
+                            }
                             if (!player.getClub().equals(editPlayer.getClub())) {
                                 player.setClub(editPlayer.getClub());
                             }
@@ -103,6 +106,9 @@ public class RegistrationPanel extends FoosTMPanel {
                             }
                             if (!player.getSurname().equals(editPlayer.getSurname())) {
                                 player.setSurname(editPlayer.getSurname());
+                            }
+                            if (!player.getGender().equals(editPlayer.getGender())) {
+                                player.setGender(editPlayer.getGender());
                             }
                             if (!player.getClub().equals(editPlayer.getClub())) {
                                 player.setClub(editPlayer.getClub());
