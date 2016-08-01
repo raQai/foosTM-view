@@ -1,6 +1,7 @@
 package de.kongfoos.foostm.view.fx.model.discipline;
 
-import de.kongfoos.foostm.model.player.APlayer;
+import de.kongfoos.foostm.model.player.Player;
+
 
 public class DisciplineGenerator {
     public static FXDiscipline od() {
@@ -13,7 +14,7 @@ public class DisciplineGenerator {
 
     public static FXDiscipline dd() {
         final FXDiscipline dd = FXDisciplineBuilderFactory.buildDoubles("Damen Doppel", "DD");
-        dd.addRule(t -> t.getPlayers().stream().allMatch(APlayer::isFemale));
+        dd.addRule(t -> t.getPlayers().stream().allMatch(Player::isFemale));
         return dd;
     }
 }

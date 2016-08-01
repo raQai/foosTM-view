@@ -1,6 +1,13 @@
 package de.kongfoos.foostm.view.fx.ui.panel.registration;
 
-import de.kongfoos.foostm.io.db.PlayerDB;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Control;
+import de.kongfoos.foostm.view.fx.db.FXDatabase;
 import de.kongfoos.foostm.view.fx.model.discipline.FXDiscipline;
 import de.kongfoos.foostm.view.fx.model.player.FXPlayer;
 import de.kongfoos.foostm.view.fx.model.registration.FXRegistration;
@@ -13,20 +20,13 @@ import de.kongfoos.foostm.view.fx.ui.control.textfield.AutoCompleteTextFieldEven
 import de.kongfoos.foostm.view.fx.ui.control.textfield.PlayerTextField;
 import de.kongfoos.foostm.view.fx.ui.dialog.EditPlayerDialog;
 import de.kongfoos.foostm.view.fx.ui.panel.FoosTMPanel;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class RegistrationPanel extends FoosTMPanel {
 
-    private final PlayerDB<FXPlayer> playerDB;
+    private final FXDatabase playerDB;
     private final FXTournament tournament;
 
-    public RegistrationPanel(PlayerDB<FXPlayer> playerDB, FXTournament tournament) {
+    public RegistrationPanel(FXDatabase playerDB, FXTournament tournament) {
         super("Register Players");
         setMinWidth(240);
         this.playerDB = playerDB;
